@@ -36,7 +36,7 @@ class GitPlugin extends VCSPlugin {
 
   override def commitDiff (root :Path, revision :String) = {
     val cmd = Seq("git", "show", revision)
-    val res = IO.exec(cmd, root)
+    val res = IO.exec(cmd, root, 10000)
     if (res.exitCode == 0) res.stdout
     else fail(res, cmd)
   }
