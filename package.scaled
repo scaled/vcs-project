@@ -5,5 +5,5 @@ descrip: Provides VCS services for Scaled projects.
  weburl: https://github.com/scaled/vcs-project
 license: New BSD
  depend: git:https://github.com/scaled/project-service.git
+ depend: git:https://github.com/scaled/textmate-grammar.git
  module: test
-
