@@ -1,0 +1,9 @@
+   name: vcs-project
+ source: git:https://github.com/scaled/vcs-project.git
+version: 1.0
+descrip: Provides VCS services for Scaled projects.
+ weburl: https://github.com/scaled/vcs-project
+license: New BSD
+ depend: git:https://github.com/scaled/project-service.git
+ module: test
+
