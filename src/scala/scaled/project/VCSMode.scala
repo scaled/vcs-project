@@ -35,6 +35,7 @@ class VCSMode (env :Env) extends MinorMode(env) {
     val state = project.bufferState("diff")
     val diffbuff = wspace.createBuffer(Store.scratch(s"*${vcs.id}: $rev", buffer.store), state)
     diffbuff.append(diffs map Line.apply)
+    diffbuff.split(diffbuff.end) // put a NL at the end
     window.focus.visit(diffbuff)
   }
 
