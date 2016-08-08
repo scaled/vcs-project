@@ -7,7 +7,8 @@ package scaled.project
 import scaled._
 import scaled.util.Errors
 
-@Minor(name="vcs", stateTypes=Array(classOf[Project]), desc="""Provides VCS fns.""")
+@Minor(name="vcs", tags=Array("project"), stateTypes=Array(classOf[Project]),
+       desc="""Provides VCS fns.""")
 class VCSMode (env :Env) extends MinorMode(env) {
 
   val project = Project(buffer)
