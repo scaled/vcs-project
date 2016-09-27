@@ -33,7 +33,9 @@ object DiffConfig extends Config.Defs {
   val grammars = resource(Seq("Diff.ndf"))(Grammar.parseNDFs)
 }
 
-@Major(name="diff", desc="Displays diff output.")
+@Major(name="diff",
+       pats=Array(".*\\.diff", ".*\\.patch"),
+       desc="Displays diff output.")
 class DiffMode (env :Env) extends GrammarCodeMode(env) {
 
   override def configDefs = DiffConfig :: super.configDefs
