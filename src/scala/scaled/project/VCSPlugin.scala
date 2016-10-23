@@ -17,21 +17,24 @@ abstract class VCSPlugin extends AbstractPlugin {
   def applies (root :Path) :Boolean
 
   /** Returns the revision for the commit that last touched `line` of `path`, or `None`. */
-  def blame (path :Path, line :Int) :Option[String]
+  def blame (path :Path, line :Int) :Future[Option[String]]
 
   /** Obtains the commit message for the specified `revision`.
     * If no message can be obtained an error message can be returned, or the empty seq. */
-  def commitMessage (root :Path, revision :String) :Seq[String]
+  def commitMessage (root :Path, revision :String) :Future[Seq[String]]
 
   /** Obtains the commit message and diff for the specified `revision`.
     * If no diff can be obtained an error message can be returned, or the empty seq. */
-  def commitDiff (root :Path, revision :String) :Seq[String]
+  def commitDiff (root :Path, revision :String) :Future[Seq[String]]
 }
 
 object NOOPPlugin extends VCSPlugin {
   override def id = "none"
   override def applies (root :Path) = false
-  override def blame (path :Path, line :Int) = None
-  override def commitMessage (root :Path, revision :String) = Seq("No known VCS in this project.")
-  override def commitDiff (root :Path, revision :String) = Seq("No known VCS in this project.")
+  override def blame (path :Path, line :Int) =
+    Future.success(None)
+  override def commitMessage (root :Path, revision :String) =
+    Future.success(Seq("No known VCS in this project."))
+  override def commitDiff (root :Path, revision :String) =
+    Future.success(Seq("No known VCS in this project."))
 }

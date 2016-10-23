@@ -1,2 +1,0 @@
-depend: git:https://github.com/scaled/vcs-project.git
-depend: mvn:junit:junit:4.12
