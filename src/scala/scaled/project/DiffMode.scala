@@ -6,15 +6,15 @@ package scaled.project
 
 import scaled._
 import scaled.code.{CodeConfig, Commenter}
-import scaled.grammar.{Grammar, GrammarConfig, GrammarCodeMode}
+import scaled.grammar._
 
-/** Provides configuration for [[VCSDiffMode]]. */
-object DiffConfig extends Config.Defs {
+@Plugin(tag="textmate-grammar")
+class DiffGrammarPlugin extends GrammarPlugin {
   import CodeConfig._
-  import GrammarConfig._
 
-  // map TextMate grammar scopes to Scaled style definitions
-  val effacers = List(
+  override def grammars = Map("source.diff" -> "Diff.ndf")
+
+  override def effacers = List(
     effacer("comment.line", commentStyle),
     effacer("comment.block", docStyle),
 
@@ -29,8 +29,6 @@ object DiffConfig extends Config.Defs {
     effacer("markup.changed", constantStyle),
     effacer("punctuation.definition.from-file", typeStyle)
   )
-
-  val grammars = resource(Seq("Diff.ndf"))(Grammar.parseNDFs)
 }
 
 @Major(name="diff",
@@ -38,9 +36,7 @@ object DiffConfig extends Config.Defs {
        desc="Displays diff output.")
 class DiffMode (env :Env) extends GrammarCodeMode(env) {
 
-  override def configDefs = DiffConfig :: super.configDefs
-  override def grammars = DiffConfig.grammars.get
-  override def effacers = DiffConfig.effacers
+  override def langScope = "source.diff"
 
   override val commenter = new Commenter() {
     override def linePrefix  = "#"
